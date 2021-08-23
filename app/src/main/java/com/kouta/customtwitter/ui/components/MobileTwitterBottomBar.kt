@@ -1,16 +1,22 @@
 package com.kouta.customtwitter.ui.components
 
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material.*
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.compose.rememberNavController
 import com.kouta.customtwitter.model.BottomNavigationItem
 
 
 @Composable
 fun MobileTwitterBottomBar(
+    navController: NavController = rememberNavController(),
+    backStackEntry: NavBackStackEntry?,
     items: List<BottomNavigationItem> = listOf(
         BottomNavigationItem.Home,
         BottomNavigationItem.Search,
@@ -18,16 +24,30 @@ fun MobileTwitterBottomBar(
         BottomNavigationItem.DirectMail
     )
 ) {
-    val selectedItem = remember { mutableStateOf(0) }
     BottomNavigation(
         backgroundColor = MaterialTheme.colors.background
     ) {
         items.forEachIndexed { index, item ->
             MobileTwitterBottomNavigationItem(
                 item = item,
-                selectedItem = selectedItem,
+                selectedItem = backStackEntry?.destination?.parent?.route == item.route,
                 index = index,
-                onClick = { selectedItem.value = index }
+                onClick = {
+                    navController.navigate(item.route) {
+                        // Pop up to the start destination of the graph to
+                        // avoid building up a large stack of destinations
+                        // on the back stack as users select items
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        // Avoid multiple copies of the same destination when
+                        // reselecting the same item
+                        launchSingleTop = true
+                        // Restore state when reselecting a previously selected item
+                        restoreState = true
+
+                    }
+                }
             )
         }
     }
@@ -36,17 +56,16 @@ fun MobileTwitterBottomBar(
 @Composable
 fun RowScope.MobileTwitterBottomNavigationItem(
     item: BottomNavigationItem,
-    selectedItem: MutableState<Int>,
+    selectedItem: Boolean,
     index: Int,
     onClick: () -> Unit = {}
 ) {
     BottomNavigationItem(
-        label = {  },
         icon = {
-            if (selectedItem.value == index) Icon(item.selectedIcon, contentDescription = item.label)
-            else Icon(item.icon, contentDescription = item.label)
+            if (selectedItem) Icon(item.selectedIcon, contentDescription = item.route)
+            else Icon(item.icon, contentDescription = item.route)
         },
-        selected = selectedItem.value == index,
+        selected = selectedItem,
         onClick = { onClick() }
     )
 }

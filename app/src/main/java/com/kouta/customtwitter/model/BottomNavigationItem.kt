@@ -10,14 +10,18 @@ import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.kouta.customtwitter.ui.Destinations.Navigation.DIRECT_MAIL_PARENT_ROUTE
+import com.kouta.customtwitter.ui.Destinations.Navigation.HOME_PARENT_ROUTE
+import com.kouta.customtwitter.ui.Destinations.Navigation.NOTIFICATION_PARENT_ROUTE
+import com.kouta.customtwitter.ui.Destinations.Navigation.SEARCH_PARENT_ROUTE
 
 sealed class BottomNavigationItem(
-    val label: String,
+    val route: String,
     val icon: ImageVector,
     val selectedIcon: ImageVector
 ) {
-    object Home: BottomNavigationItem("Home", Icons.Outlined.Home, Icons.Filled.Home)
-    object Search: BottomNavigationItem("Search", Icons.Outlined.Search, Icons.Filled.Search)
-    object Notification: BottomNavigationItem("Notification", Icons.Outlined.Notifications, Icons.Filled.Notifications)
-    object DirectMail: BottomNavigationItem("DirectMail", Icons.Outlined.Email, Icons.Filled.Email )
+    object Home: BottomNavigationItem(HOME_PARENT_ROUTE, Icons.Outlined.Home, Icons.Filled.Home)
+    object Search: BottomNavigationItem(SEARCH_PARENT_ROUTE, Icons.Outlined.Search, Icons.Filled.Search)
+    object Notification: BottomNavigationItem(NOTIFICATION_PARENT_ROUTE, Icons.Outlined.Notifications, Icons.Filled.Notifications)
+    object DirectMail: BottomNavigationItem(DIRECT_MAIL_PARENT_ROUTE, Icons.Outlined.Email, Icons.Filled.Email )
 }
