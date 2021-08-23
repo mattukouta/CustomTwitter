@@ -3,22 +3,40 @@ package com.kouta.customtwitter.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import com.kouta.customtwitter.ui.CustomTwitter
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
+import com.google.accompanist.insets.ProvideWindowInsets
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.kouta.customtwitter.ui.mobiletwitter.MobileTwitterScreen
 import com.kouta.customtwitter.ui.theme.CustomTwitterTheme
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, true)
         setContent {
-            CustomTwitterTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    CustomTwitter()
+            ProvideWindowInsets {
+                val systemUiController = rememberSystemUiController()
+                val isDarkTheme = isSystemInDarkTheme()
+                SideEffect {
+                    systemUiController.setSystemBarsColor(
+                        color = Color.Transparent,
+                        darkIcons = !isDarkTheme
+                    )
+                }
+
+                CustomTwitterTheme {
+                    Surface(color = MaterialTheme.colors.background) {
+//                        CustomTwitter()
+                        MobileTwitterScreen()
+                    }
                 }
             }
         }

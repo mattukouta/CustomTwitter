@@ -1,6 +1,12 @@
 package dependencies
 
 object Dep {
+    object Accompanist {
+        private const val version = "0.17.0"
+        const val insets = "com.google.accompanist:accompanist-insets:$version"
+        const val systemUIController = "com.google.accompanist:accompanist-systemuicontroller:$version"
+    }
+
     object Compose {
         const val version = "1.0.1"
 
