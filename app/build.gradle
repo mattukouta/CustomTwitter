@@ -57,11 +57,14 @@ dependencies {
 //    implementation Dep.Compose.ui
     implementation Dep.Compose.material
 //    implementation Dep.Compose.preview
+    implementation Dep.Coil.coil
     implementation Dep.Jetpack.activity
     implementation Dep.Jetpack.appCompat
+    implementation Dep.Jetpack.constraintLayout
     implementation Dep.Jetpack.core
     implementation Dep.Jetpack.lifecycleRuntime
     implementation Dep.Jetpack.navigationCompose
+    implementation Dep.Jetpack.paging
     implementation Dep.Jetpack.viewModel
 
     testImplementation 'junit:junit:4.+'

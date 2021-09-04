@@ -1,21 +1,33 @@
 package com.kouta.customtwitter.ui.mobiletwitter.hometimeline
 
-import androidx.compose.foundation.clickable
-import androidx.compose.material.Text
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.kouta.customtwitter.ui.Destinations.Composable.TWEET_DETAIL_ROUTE
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
+import com.kouta.customtwitter.model.Tweet
+import com.kouta.customtwitter.ui.components.TweetItem
 
 @Composable
 fun HomeTimeLineScreen(
-    navController: NavController = rememberNavController()
+    navController: NavController = rememberNavController(),
+    viewModel: HomeTimeLineViewModel = viewModel()
 ){
-    Text(
-        modifier = Modifier.clickable {
-            navController.navigate(TWEET_DETAIL_ROUTE)
-        },
-        text = "Home"
-    )
+    val listState = rememberLazyListState()
+
+    val items: LazyPagingItems<Tweet> = viewModel.tweets.collectAsLazyPagingItems()
+
+    LazyColumn(
+        state = listState
+    ){
+        items(items) { item ->
+            if (item != null) {
+                TweetItem(tweetItem = item)
+            }
+        }
+    }
 }

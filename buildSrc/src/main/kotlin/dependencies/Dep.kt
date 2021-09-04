@@ -18,12 +18,18 @@ object Dep {
         const val uiTooling = "androidx.compose.ui:ui-tooling:$version"
     }
 
+    object Coil {
+        const val coil = "io.coil-kt:coil-compose:1.3.2"
+    }
+
     object Jetpack {
         const val activity = "androidx.activity:activity-compose:1.3.1"
         const val appCompat = "androidx.appcompat:appcompat:1.2.0"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha07"
         const val core = "androidx.core:core-ktx:1.3.2"
         const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
         const val navigationCompose = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
+        const val paging = "androidx.paging:paging-compose:1.0.0-alpha12"
         const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
     }
 }
