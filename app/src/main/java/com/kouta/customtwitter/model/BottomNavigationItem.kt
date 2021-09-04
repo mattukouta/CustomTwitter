@@ -10,10 +10,10 @@ import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.kouta.customtwitter.ui.Destinations.Navigation.DIRECT_MAIL_PARENT_ROUTE
-import com.kouta.customtwitter.ui.Destinations.Navigation.HOME_PARENT_ROUTE
-import com.kouta.customtwitter.ui.Destinations.Navigation.NOTIFICATION_PARENT_ROUTE
-import com.kouta.customtwitter.ui.Destinations.Navigation.SEARCH_PARENT_ROUTE
+import com.kouta.customtwitter.utils.Destinations.Mobile.Navigation.DIRECT_MAIL_PARENT_ROUTE
+import com.kouta.customtwitter.utils.Destinations.Mobile.Navigation.HOME_PARENT_ROUTE
+import com.kouta.customtwitter.utils.Destinations.Mobile.Navigation.NOTIFICATION_PARENT_ROUTE
+import com.kouta.customtwitter.utils.Destinations.Mobile.Navigation.SEARCH_PARENT_ROUTE
 
 sealed class BottomNavigationItem(
     val route: String,
