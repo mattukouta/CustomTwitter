@@ -11,6 +11,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.kouta.customtwitter.model.Tweet
 import com.kouta.customtwitter.ui.components.TweetItem
+import com.kouta.customtwitter.utils.Destinations.Mobile.Composable.TWEET_DETAIL_ROUTE
 
 @Composable
 fun HomeTimeLineScreen(
@@ -26,7 +27,12 @@ fun HomeTimeLineScreen(
     ){
         items(items) { item ->
             if (item != null) {
-                TweetItem(tweetItem = item)
+                TweetItem(
+                    onItemClick = {
+                        navController.navigate(TWEET_DETAIL_ROUTE)
+                    },
+                    tweetItem = item
+                )
             }
         }
     }

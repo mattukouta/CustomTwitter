@@ -1,16 +1,16 @@
 package com.kouta.customtwitter.utils
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import com.kouta.customtwitter.ui.launch.LaunchScreen
 import com.kouta.customtwitter.ui.mobiletwitter.hometimeline.HomeTimeLineScreen
 import com.kouta.customtwitter.ui.mobiletwitter.tweetdetail.TweetDetailScreen
+import com.kouta.customtwitter.utils.Destinations.LAUNCH_ROUTE
 import com.kouta.customtwitter.utils.Destinations.Mobile.Composable.DIRECT_MAIL_ROUTE
 import com.kouta.customtwitter.utils.Destinations.Mobile.Composable.HOME_TIME_LINE_ROUTE
 import com.kouta.customtwitter.utils.Destinations.Mobile.Composable.NOTIFICATION_ROUTE
@@ -22,15 +22,19 @@ import com.kouta.customtwitter.utils.Destinations.Mobile.Navigation.NOTIFICATION
 import com.kouta.customtwitter.utils.Destinations.Mobile.Navigation.SEARCH_PARENT_ROUTE
 
 @Composable
-fun MobileTwitterNavGraph(
+fun CustomTwitterNavGraph(
+    modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = HOME_PARENT_ROUTE
+    startDestination: String = LAUNCH_ROUTE
 ) {
     NavHost(
-        modifier = Modifier.padding(bottom = 56.dp),
+        modifier = modifier,
         navController = navController,
         startDestination = startDestination
     ) {
+        composable(LAUNCH_ROUTE) {
+            LaunchScreen(navController = navController)
+        }
         navigation(
             startDestination = HOME_TIME_LINE_ROUTE,
             route = HOME_PARENT_ROUTE

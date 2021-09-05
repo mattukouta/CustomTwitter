@@ -31,12 +31,13 @@ import com.kouta.customtwitter.ui.theme.CustomTwitterTheme
 @Composable
 fun TweetItem(
     modifier: Modifier = Modifier,
-    tweetItem: Tweet
+    tweetItem: Tweet,
+    onItemClick: (tweetID: Int) -> Unit = {}
 ) {
     ConstraintLayout(
         modifier = modifier
             .fillMaxWidth()
-            .clickable { }
+            .clickable { onItemClick(tweetItem.tweetID) }
             .padding(vertical = 8.dp)
     ) {
         val (

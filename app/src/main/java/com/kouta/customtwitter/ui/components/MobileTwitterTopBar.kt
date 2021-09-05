@@ -10,13 +10,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.google.accompanist.insets.statusBarsPadding
 
 @Composable
 fun MobileTwitterTopBar(
+    modifier: Modifier = Modifier,
     onClick: () -> Unit = {}
 ) {
     TopAppBar(
-        modifier = Modifier
+        modifier = modifier
             .clickable {
                 onClick()
             },

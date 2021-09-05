@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.kouta.customtwitter"
-        minSdk 21
+        minSdk 23
         targetSdk 30
         versionCode 1
         versionName "1.0"
@@ -66,6 +66,7 @@ dependencies {
     implementation Dep.Jetpack.navigationCompose
     implementation Dep.Jetpack.paging
     implementation Dep.Jetpack.viewModel
+    implementation Dep.Twitter4j.core
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

@@ -32,4 +32,8 @@ object Dep {
         const val paging = "androidx.paging:paging-compose:1.0.0-alpha12"
         const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
     }
+
+    object Twitter4j {
+        const val core = "org.twitter4j:twitter4j-core:4.0.7"
+    }
 }
