@@ -3,6 +3,8 @@ package com.kouta.customtwitter.utils
 object Destinations {
     const val LAUNCH_ROUTE = "launch"
 
+    const val LOGIN_ROUTE = "login"
+
     object Mobile {
         const val MOBILE_TWITTER_ROUTE = "mobileTwitter"
 

@@ -11,7 +11,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.kouta.customtwitter.utils.Destinations.LAUNCH_ROUTE
-import com.kouta.customtwitter.utils.Destinations.Mobile.Composable.HOME_TIME_LINE_ROUTE
+import com.kouta.customtwitter.utils.Destinations.LOGIN_ROUTE
 
 @Composable
 fun LaunchScreen(
@@ -21,7 +21,7 @@ fun LaunchScreen(
         modifier = Modifier
             .fillMaxSize()
             .clickable {
-                navController.navigate(HOME_TIME_LINE_ROUTE) {
+                navController.navigate(LOGIN_ROUTE) {
                     popUpTo(LAUNCH_ROUTE) {
                         inclusive = true
                     }
