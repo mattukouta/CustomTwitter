@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeTimeLineViewModel @Inject constructor(
-    private val tweetRepository: TweetRepository = TweetRepository()
+    private val tweetRepository: TweetRepository
 ) : ViewModel() {
     val tweets = Pager(PagingConfig(pageSize = 10)) {
         PageSource(tweetRepository.getTweet())

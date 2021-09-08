@@ -4,6 +4,7 @@ import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,7 +12,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.kouta.customtwitter.ui.launch.LaunchScreen
 import com.kouta.customtwitter.ui.login.LoginScreen
+import com.kouta.customtwitter.ui.login.LoginViewModel
 import com.kouta.customtwitter.ui.mobiletwitter.hometimeline.HomeTimeLineScreen
+import com.kouta.customtwitter.ui.mobiletwitter.hometimeline.HomeTimeLineViewModel
 import com.kouta.customtwitter.ui.mobiletwitter.tweetdetail.TweetDetailScreen
 import com.kouta.customtwitter.utils.Destinations.LAUNCH_ROUTE
 import com.kouta.customtwitter.utils.Destinations.LOGIN_ROUTE
@@ -42,9 +45,11 @@ fun CustomTwitterNavGraph(
         }
 
         composable(LOGIN_ROUTE) {
+            val viewModel = hiltViewModel<LoginViewModel>()
             LoginScreen(
                 navController = navController,
-                scaffoldState = scaffoldState
+                scaffoldState = scaffoldState,
+                viewModel = viewModel
             )
         }
 
@@ -53,8 +58,10 @@ fun CustomTwitterNavGraph(
             route = HOME_PARENT_ROUTE
         ) {
             composable(HOME_TIME_LINE_ROUTE) {
+                val viewModel = hiltViewModel<HomeTimeLineViewModel>()
                 HomeTimeLineScreen(
-                    navController = navController
+                    navController = navController,
+                    viewModel = viewModel
                 )
             }
 

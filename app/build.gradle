@@ -3,6 +3,8 @@ import dependencies.Dep
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -67,6 +69,11 @@ dependencies {
     implementation Dep.Jetpack.paging
     implementation Dep.Jetpack.viewModel
     implementation Dep.Twitter4j.core
+
+    implementation Dep.Hilt.hiltAndroid
+    kapt Dep.Hilt.hiltAndroidCompiler
+    implementation Dep.Hilt.hiltLifecycle
+    kapt Dep.Hilt.hiltCompiler
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
