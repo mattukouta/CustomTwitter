@@ -19,9 +19,12 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
+import com.kouta.customtwitter.repository.DataType
 import com.kouta.customtwitter.ui.components.SimpleSnackBar
 import com.kouta.customtwitter.utils.Destinations.LOGIN_ROUTE
 import com.kouta.customtwitter.utils.Destinations.Mobile.Composable.HOME_TIME_LINE_ROUTE
+import com.kouta.customtwitter.utils.Params.Key.ACCESS_TOKEN
+import com.kouta.customtwitter.utils.Params.Key.ACCESS_TOKEN_SECRET
 import com.kouta.customtwitter.utils.TwitterAPI.CALLBACK_URL
 import kotlinx.coroutines.CoroutineScope
 import twitter4j.auth.AccessToken
@@ -44,7 +47,6 @@ fun LoginScreen(
         when(loadingState) {
             is LoginState.Loading -> {
                 viewModel.getRequestToken()
-                Log.d("check:request" , "viewModel.getRequestToken()")
             }
 
             is LoginState.Requesting -> {
@@ -80,6 +82,21 @@ fun LoginScreen(
             }
 
             is LoginState.Success -> {
+                val accessToken = (loadingState as LoginState.Success).accessToken
+
+                viewModel.putData(
+                    listOf(
+                        DataType.StringData(
+                            key = ACCESS_TOKEN,
+                            value = accessToken.token
+                        ),
+                        DataType.StringData(
+                            key = ACCESS_TOKEN_SECRET,
+                            value = accessToken.tokenSecret
+                        )
+                    )
+                )
+
                 navController.navigate(HOME_TIME_LINE_ROUTE) {
                     popUpTo(LOGIN_ROUTE) {
                         inclusive = true
@@ -103,9 +120,7 @@ fun LoginScreen(
 
 sealed class LoginState {
     object Loading: LoginState()
-    data class Requesting(val requestToken: RequestToken): LoginState() {
-
-    }
+    data class Requesting(val requestToken: RequestToken): LoginState()
     data class Success(val accessToken: AccessToken): LoginState()
     data class Error(val e: Exception): LoginState()
 }

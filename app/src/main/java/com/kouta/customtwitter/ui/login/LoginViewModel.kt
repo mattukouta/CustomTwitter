@@ -4,6 +4,8 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kouta.customtwitter.repository.DataType
+import com.kouta.customtwitter.repository.UserSettingRepository
 import com.kouta.customtwitter.utils.TwitterAPI.CONSUMER_KEY
 import com.kouta.customtwitter.utils.TwitterAPI.CONSUMER_SECRET
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-
+    private val userSettingRepository: UserSettingRepository
 ): ViewModel() {
 
     private val _loadingState: MutableStateFlow<LoginState> = MutableStateFlow(LoginState.Loading)
@@ -75,5 +77,13 @@ class LoginViewModel @Inject constructor(
      */
     fun resetLoadingState() {
         _loadingState.value = LoginState.Loading
+    }
+
+    fun putData(dataTypes: List<DataType>) {
+        try {
+            userSettingRepository.putData(dataTypes)
+        } catch (e: Exception) {
+            _loadingState.value = LoginState.Error(Exception())
+        }
     }
 }
