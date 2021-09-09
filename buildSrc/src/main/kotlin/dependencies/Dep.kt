@@ -33,6 +33,12 @@ object Dep {
         const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
     }
 
+    object Junit5 {
+        private const val version = "5.7.1"
+        const val api = "org.junit.jupiter:junit-jupiter-api:$version"
+        const val engine = "org.junit.jupiter:junit-jupiter-engine:$version"
+    }
+
     object Hilt {
         const val version = "2.38.1"
         const val hiltAndroid = "com.google.dagger:hilt-android:$version"
@@ -41,10 +47,15 @@ object Dep {
         const val hiltCompiler = "androidx.hilt:hilt-compiler:1.0.0"
     }
 
+    object Mockk {
+        const val mockk = "io.mockk:mockk:1.12.0"
+    }
+
     object Plugin {
         const val gradle = "com.android.tools.build:gradle:7.0.1"
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21"
         const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Hilt.version}"
+        const val junit5 = "de.mannodermaus.gradle.plugins:android-junit5:1.7.1.1"
     }
 
     object Twitter4j {

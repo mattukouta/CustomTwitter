@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'de.mannodermaus.android-junit5'
 }
 
 android {
@@ -75,7 +76,11 @@ dependencies {
     implementation Dep.Hilt.hiltLifecycle
     kapt Dep.Hilt.hiltCompiler
 
-    testImplementation 'junit:junit:4.+'
+    testImplementation Dep.Junit5.api
+    testRuntimeOnly Dep.Junit5.engine
+
+    testImplementation Dep.Mockk.mockk
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
