@@ -1,13 +1,11 @@
 package com.kouta.customtwitter.ui.login
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kouta.customtwitter.BuildConfig.*
 import com.kouta.customtwitter.repository.DataType
 import com.kouta.customtwitter.repository.UserSettingRepository
-import com.kouta.customtwitter.utils.TwitterAPI.CONSUMER_KEY
-import com.kouta.customtwitter.utils.TwitterAPI.CONSUMER_SECRET
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.Dispatchers.IO
