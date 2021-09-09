@@ -23,15 +23,20 @@ class LaunchViewModel @Inject constructor(
 
     fun getUserData() {
         viewModelScope.launch(Default) {
-            val data = userSettingRepository.getData(
+            val data = getData(
                 DataType.StringData(
                     key = ACCESS_TOKEN,
-                    value = DEFAULT_VALUE
+                    value = DEFAULT_VALUE,
+                    defaultValue = DEFAULT_VALUE
                 )
             )
 
-            if ((data as DataType.StringData).value == DEFAULT_VALUE) _launchState.value = LaunchState.Complete(false)
+            if ((data as DataType.StringData).value == data.defaultValue) _launchState.value = LaunchState.Complete(false)
             else _launchState.value = LaunchState.Complete(true)
         }
     }
+
+    private fun getData(
+        dataType: DataType
+    ): DataType = userSettingRepository.getData(dataType)
 }
