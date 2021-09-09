@@ -24,7 +24,7 @@ jobs:
       run: chmod +x gradlew
       
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew build -P CONSUMER_KEY=$CONSUMER_KEY -P CONSUMER_SECRET=$CONSUMER_SECRET
       
     # テスト
     - name: Test with Gradle
