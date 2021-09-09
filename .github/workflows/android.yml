@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main ]
 
-jobs:
+jobs:  
   build:
 
     runs-on: ubuntu-latest
@@ -19,12 +19,18 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         cache: gradle
+        
+    - name: Create gradle.properties
+      run: cat <<EOF > ~/.gradle/gradle.properties
+            CONSUMER_KEY=$CONSUMER_KEY
+            CONSUMER_SECRET=$CONSUMER_SECRET
+          EOF
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
       
     - name: Build with Gradle
-      run: ./gradlew build -P CONSUMER_KEY=$CONSUMER_KEY -P CONSUMER_SECRET=$CONSUMER_SECRET
+      run: ./gradlew build
       
     # テスト
     - name: Test with Gradle
