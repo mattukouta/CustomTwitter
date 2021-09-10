@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kouta.customtwitter.BuildConfig.*
+import com.kouta.customtwitter.model.Result
 import com.kouta.customtwitter.repository.DataType
 import com.kouta.customtwitter.repository.UserSettingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -43,7 +44,7 @@ class LoginViewModel @Inject constructor(
 
         viewModelScope.launch(IO){
             try {
-                _loadingState.value = LoginState.Requesting(
+                _loadingState.value = LoginState.RequestingAccessToken(
                     twitter.oAuthRequestToken
                 )
             } catch (e: IllegalStateException) {
@@ -55,7 +56,7 @@ class LoginViewModel @Inject constructor(
     /**
      * アクセストークンの取得用
      */
-    fun handleUrl(url: String) {
+    fun getAccessToken(url: String) {
         val uri = Uri.parse(url)
         val oauthVerifier = uri.getQueryParameter("oauth_verifier") ?: ""
 
@@ -63,7 +64,7 @@ class LoginViewModel @Inject constructor(
             try {
                 val accessToken = twitter.getOAuthAccessToken(oauthVerifier)
 
-                _loadingState.value = LoginState.Success(accessToken)
+                _loadingState.value = LoginState.SavingUserData(accessToken)
             } catch (e: Exception) {
                 _loadingState.value = LoginState.Error(e)
             }
@@ -78,10 +79,14 @@ class LoginViewModel @Inject constructor(
     }
 
     fun putData(dataTypes: List<DataType>) {
-        try {
-            userSettingRepository.putData(dataTypes)
-        } catch (e: Exception) {
-            _loadingState.value = LoginState.Error(Exception())
+        when(userSettingRepository.putData(dataTypes)) {
+            is Result.Success -> {
+                _loadingState.value = LoginState.Success
+            }
+
+            is Result.Error -> {
+                _loadingState.value = LoginState.Error(Exception())
+            }
         }
     }
 }

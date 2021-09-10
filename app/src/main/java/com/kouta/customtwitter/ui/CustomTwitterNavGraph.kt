@@ -43,7 +43,11 @@ fun CustomTwitterNavGraph(
         startDestination = startDestination
     ) {
         composable(LAUNCH_ROUTE) {
-            LaunchScreen(navController = navController)
+            val viewModel = hiltViewModel<LaunchViewModel>()
+            LaunchScreen(
+                navController = navController,
+                viewModel = viewModel
+            )
         }
 
         composable(LOGIN_ROUTE) {

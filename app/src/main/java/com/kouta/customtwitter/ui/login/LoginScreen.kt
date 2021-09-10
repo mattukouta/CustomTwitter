@@ -49,8 +49,8 @@ fun LoginScreen(
                 viewModel.getRequestToken()
             }
 
-            is LoginState.Requesting -> {
-                val authorizationURL = (loadingState as LoginState.Requesting).requestToken.authorizationURL
+            is LoginState.RequestingAccessToken -> {
+                val authorizationURL = (loadingState as LoginState.RequestingAccessToken).requestToken.authorizationURL
 
                 AndroidView(
                     factory = { context ->
@@ -63,7 +63,7 @@ fun LoginScreen(
                                 override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                                     if (url.toString().startsWith(CALLBACK_URL)) {
                                         Log.d("Authorization URL: ", url.toString())
-                                        viewModel.handleUrl(url.toString())
+                                        viewModel.getAccessToken(url.toString())
 
                                         return true
                                     }
@@ -81,8 +81,8 @@ fun LoginScreen(
                 )
             }
 
-            is LoginState.Success -> {
-                val accessToken = (loadingState as LoginState.Success).accessToken
+            is LoginState.SavingUserData -> {
+                val accessToken = (loadingState as LoginState.SavingUserData).accessToken
 
                 viewModel.putData(
                     listOf(
@@ -96,7 +96,9 @@ fun LoginScreen(
                         )
                     )
                 )
+            }
 
+            is LoginState.Success -> {
                 navController.navigate(HOME_TIME_LINE_ROUTE) {
                     popUpTo(LOGIN_ROUTE) {
                         inclusive = true
@@ -120,8 +122,9 @@ fun LoginScreen(
 
 sealed class LoginState {
     object Loading: LoginState()
-    data class Requesting(val requestToken: RequestToken): LoginState()
-    data class Success(val accessToken: AccessToken): LoginState()
+    data class RequestingAccessToken(val requestToken: RequestToken): LoginState()
+    data class SavingUserData(val accessToken: AccessToken): LoginState()
+    object Success: LoginState()
     data class Error(val e: Exception): LoginState()
 }
 
