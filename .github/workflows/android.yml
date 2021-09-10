@@ -1,0 +1,39 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:  
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+        cache: gradle
+        
+    - name: echo gradle.properties
+      env:
+        CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
+        CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
+      shell: bash
+      run:
+        echo -e "org.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8\nandroid.useAndroidX=true\nandroid.enableJetifier=true\nkotlin.code.style=official\nCONSUMER_KEY=\"${CONSUMER_KEY}\"\nCONSUMER_SECRET=\"${CONSUMER_SECRET}\"" > gradle.properties
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Build with Gradle
+      run: ./gradlew assembleDebug
+      
+    # テスト
+    - name: Test with Gradle
+      run: ./gradlew testDebugUnitTest

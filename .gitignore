@@ -16,4 +16,3 @@ local.properties
 
 /buildSrc/.gradle
 /buildSrc/build
-/app/src/main/java/com/kouta/customtwitter/utils/TwitterAPI.kt
