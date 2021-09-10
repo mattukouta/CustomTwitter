@@ -1,5 +1,6 @@
 package com.kouta.customtwitter.ui.launch
 
+import com.kouta.customtwitter.model.Result
 import com.kouta.customtwitter.repository.DataType
 import com.kouta.customtwitter.repository.UserSettingRepository
 import io.mockk.MockKAnnotations
@@ -32,7 +33,7 @@ internal class LaunchViewModelTest {
     fun getUserData_return_complete_true() = runBlocking {
         val fakeStringData = DataType.StringData("fake_key", "fake_default", "fake_default_value")
 
-        every { userSettingRepository.getData(any()) } returns fakeStringData
+        every { userSettingRepository.getData(any()) } returns Result.Success(fakeStringData)
 
         launchViewModelSpy.getUserData()
 
@@ -47,7 +48,7 @@ internal class LaunchViewModelTest {
     fun getUserData_return_complete_false() = runBlocking {
         val fakeStringData = DataType.StringData("fake_key", "fake_default_value", "fake_default_value")
 
-        every { userSettingRepository.getData(any()) } returns fakeStringData
+        every { userSettingRepository.getData(any()) } returns Result.Success(fakeStringData)
 
         launchViewModelSpy.getUserData()
 

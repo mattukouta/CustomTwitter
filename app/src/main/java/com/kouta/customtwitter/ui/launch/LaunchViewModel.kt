@@ -2,6 +2,7 @@ package com.kouta.customtwitter.ui.launch
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kouta.customtwitter.model.Result
 import com.kouta.customtwitter.repository.DataType
 import com.kouta.customtwitter.repository.UserSettingRepository
 import com.kouta.customtwitter.utils.Params.Key.ACCESS_TOKEN
@@ -38,5 +39,19 @@ class LaunchViewModel @Inject constructor(
 
     private fun getData(
         dataType: DataType
-    ): DataType = userSettingRepository.getData(dataType)
+    ): DataType {
+        return when(val result: Result<DataType> = userSettingRepository.getData(dataType)) {
+            is Result.Success -> {
+                result.data
+            }
+            is Result.Error -> {
+                /*TODO: エラー時の処理を追加*/
+                DataType.StringData(
+                    "error_key",
+                    "error_value",
+                    "error_default_value"
+                )
+            }
+        }
+    }
 }
