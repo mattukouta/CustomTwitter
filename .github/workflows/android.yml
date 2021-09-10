@@ -26,9 +26,7 @@ jobs:
         CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
       shell: bash
       run:
-        echo -e CONSUMER_KEY=${CONSUMER_KEY}\nCONSUMER_SECRET=${CONSUMER_SECRET} > gradle.properties
-        cat gradle.properties
-    
+        echo -e "org.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8\nandroid.useAndroidX=true\nandroid.enableJetifier=true\nkotlin.code.style=official\nCONSUMER_KEY=${CONSUMER_KEY}\nCONSUMER_SECRET=${CONSUMER_SECRET}" > gradle.properties
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
