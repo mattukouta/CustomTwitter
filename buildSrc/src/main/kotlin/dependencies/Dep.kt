@@ -22,6 +22,10 @@ object Dep {
         const val coil = "io.coil-kt:coil-compose:1.3.2"
     }
 
+    object Coroutine {
+        const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1"
+    }
+
     object Jetpack {
         const val activity = "androidx.activity:activity-compose:1.3.1"
         const val appCompat = "androidx.appcompat:appcompat:1.2.0"

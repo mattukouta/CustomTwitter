@@ -1,6 +1,7 @@
 package com.kouta.customtwitter.ui.login
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kouta.customtwitter.BuildConfig.*
@@ -28,10 +29,8 @@ class LoginViewModel @Inject constructor(
 
     private lateinit var twitter: Twitter
 
-    /**
-     * リクエストトークンの取得
-     */
-    fun getRequestToken(){
+    private fun createTwitterProperty(): Twitter {
+        val returnProperty: Twitter
         val builder = ConfigurationBuilder()
             .setDebugEnabled(true)
             .setOAuthConsumerKey(CONSUMER_KEY)
@@ -40,14 +39,24 @@ class LoginViewModel @Inject constructor(
         val config = builder.build()
         val factory = TwitterFactory(config)
 
-        twitter = factory.instance
+        returnProperty = factory.instance
+        return returnProperty
+    }
+
+    private fun getTwitterProperty(): Twitter = twitter
+
+    /**
+     * リクエストトークンの取得
+     */
+    fun getRequestToken(){
+        twitter = createTwitterProperty()
 
         viewModelScope.launch(IO){
             try {
                 _loadingState.value = LoginState.RequestingAccessToken(
                     twitter.oAuthRequestToken
                 )
-            } catch (e: IllegalStateException) {
+            } catch (e: Exception) {
                 _loadingState.value = LoginState.Error(e)
             }
         }
@@ -62,9 +71,10 @@ class LoginViewModel @Inject constructor(
 
         viewModelScope.launch(Default) {
             try {
-                val accessToken = twitter.getOAuthAccessToken(oauthVerifier)
+                val accessToken = getTwitterProperty().getOAuthAccessToken(oauthVerifier)
 
                 _loadingState.value = LoginState.SavingUserData(accessToken)
+//                _loadingState.value = LoginState.Error(Exception())
             } catch (e: Exception) {
                 _loadingState.value = LoginState.Error(e)
             }
@@ -79,13 +89,13 @@ class LoginViewModel @Inject constructor(
     }
 
     fun putData(dataTypes: List<DataType>) {
-        when(userSettingRepository.putData(dataTypes)) {
+        when(val result = userSettingRepository.putData(dataTypes)) {
             is Result.Success -> {
                 _loadingState.value = LoginState.Success
             }
 
             is Result.Error -> {
-                _loadingState.value = LoginState.Error(Exception())
+                _loadingState.value = LoginState.Error(result.exception)
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.kouta.customtwitter.ui.launch
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kouta.customtwitter.model.Result

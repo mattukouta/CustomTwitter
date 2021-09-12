@@ -53,6 +53,10 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -73,6 +77,7 @@ dependencies {
     implementation Dep.Jetpack.paging
     implementation Dep.Jetpack.viewModel
     implementation Dep.Twitter4j.core
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
 
     implementation Dep.Hilt.hiltAndroid
     kapt Dep.Hilt.hiltAndroidCompiler
@@ -82,7 +87,11 @@ dependencies {
     testImplementation Dep.Junit5.api
     testRuntimeOnly Dep.Junit5.engine
 
+    testImplementation Dep.Coroutine.test
     testImplementation Dep.Mockk.mockk
+
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

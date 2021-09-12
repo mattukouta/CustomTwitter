@@ -3,12 +3,9 @@ package com.kouta.customtwitter.ui.launch
 import com.kouta.customtwitter.model.Result
 import com.kouta.customtwitter.repository.DataType
 import com.kouta.customtwitter.repository.UserSettingRepository
-import io.mockk.MockKAnnotations
-import io.mockk.every
+import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
-import io.mockk.spyk
-import io.mockk.verify
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
