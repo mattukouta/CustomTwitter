@@ -73,11 +73,11 @@ dependencies {
     implementation Dep.Jetpack.constraintLayout
     implementation Dep.Jetpack.core
     implementation Dep.Jetpack.lifecycleRuntime
+    implementation Dep.Jetpack.lifecycleLivedata
     implementation Dep.Jetpack.navigationCompose
     implementation Dep.Jetpack.paging
     implementation Dep.Jetpack.viewModel
     implementation Dep.Twitter4j.core
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
 
     implementation Dep.Hilt.hiltAndroid
     kapt Dep.Hilt.hiltAndroidCompiler
@@ -90,8 +90,8 @@ dependencies {
     testImplementation Dep.Coroutine.test
     testImplementation Dep.Mockk.mockk
 
-    testImplementation 'org.jetbrains.kotlin:kotlin-test'
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation Dep.KotlinTest.test
+    testImplementation Dep.Jetpack.coreTesting
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

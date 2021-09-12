@@ -27,11 +27,17 @@ object Dep {
     }
 
     object Jetpack {
+        object Version {
+            const val lifecycle = "2.3.1"
+        }
+
         const val activity = "androidx.activity:activity-compose:1.3.1"
         const val appCompat = "androidx.appcompat:appcompat:1.2.0"
+        const val coreTesting = "androidx.arch.core:core-testing:2.1.0"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha07"
         const val core = "androidx.core:core-ktx:1.3.2"
-        const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+        const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Version.lifecycle}"
+        const val lifecycleLivedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Version.lifecycle}"
         const val navigationCompose = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
         const val paging = "androidx.paging:paging-compose:1.0.0-alpha12"
         const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
@@ -49,6 +55,10 @@ object Dep {
         const val hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:$version"
         const val hiltLifecycle = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
         const val hiltCompiler = "androidx.hilt:hilt-compiler:1.0.0"
+    }
+
+    object KotlinTest {
+        const val test = "org.jetbrains.kotlin:kotlin-test"
     }
 
     object Mockk {
