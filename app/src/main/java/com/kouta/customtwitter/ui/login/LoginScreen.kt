@@ -23,8 +23,8 @@ import com.kouta.customtwitter.repository.DataType
 import com.kouta.customtwitter.ui.components.SimpleSnackBar
 import com.kouta.customtwitter.utils.Destinations.LOGIN_ROUTE
 import com.kouta.customtwitter.utils.Destinations.Mobile.Composable.HOME_TIME_LINE_ROUTE
-import com.kouta.customtwitter.utils.Params.Key.ACCESS_TOKEN
-import com.kouta.customtwitter.utils.Params.Key.ACCESS_TOKEN_SECRET
+import com.kouta.customtwitter.utils.Params.SharedPreferencesKey.ACCESS_TOKEN
+import com.kouta.customtwitter.utils.Params.SharedPreferencesKey.ACCESS_TOKEN_SECRET
 import com.kouta.customtwitter.utils.Params.CALLBACK_URL
 import kotlinx.coroutines.CoroutineScope
 import twitter4j.auth.AccessToken

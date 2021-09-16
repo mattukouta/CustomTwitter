@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.kouta.customtwitter.model.Result
 import com.kouta.customtwitter.repository.DataType
 import com.kouta.customtwitter.repository.UserSettingRepository
-import com.kouta.customtwitter.utils.Params.Key.ACCESS_TOKEN
+import com.kouta.customtwitter.utils.Params.SharedPreferencesKey.ACCESS_TOKEN
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.flow.MutableStateFlow

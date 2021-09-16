@@ -65,11 +65,30 @@ object Dep {
         const val mockk = "io.mockk:mockk:1.12.0"
     }
 
+    object Moshi {
+        private const val version = "1.11.0"
+        const val moshi = "com.squareup.moshi:moshi:$version"
+        const val moshiKotlin = "com.squareup.moshi:moshi-kotlin:$version"
+        const val codegen = "com.squareup.moshi:moshi-kotlin-codegen:$version"
+    }
+
+    object OkHttp {
+        private const val version = "4.9.0"
+        const val okhttp = "com.squareup.okhttp3:okhttp:$version"
+        const val logging = "com.squareup.okhttp3:logging-interceptor:$version"
+    }
+
     object Plugin {
         const val gradle = "com.android.tools.build:gradle:7.0.1"
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21"
         const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Hilt.version}"
         const val junit5 = "de.mannodermaus.gradle.plugins:android-junit5:1.7.1.1"
+    }
+
+    object Retrofit {
+        private const val version = "2.9.0"
+        const val retrofit = "com.squareup.retrofit2:retrofit:$version"
+        const val converter = "com.squareup.retrofit2:converter-moshi:$version"
     }
 
     object Twitter4j {

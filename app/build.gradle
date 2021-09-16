@@ -77,12 +77,18 @@ dependencies {
     implementation Dep.Jetpack.navigationCompose
     implementation Dep.Jetpack.paging
     implementation Dep.Jetpack.viewModel
-    implementation Dep.Twitter4j.core
-
     implementation Dep.Hilt.hiltAndroid
     kapt Dep.Hilt.hiltAndroidCompiler
     implementation Dep.Hilt.hiltLifecycle
     kapt Dep.Hilt.hiltCompiler
+    implementation Dep.Moshi.moshi
+    implementation Dep.Moshi.moshiKotlin
+    kapt Dep.Moshi.codegen
+    implementation Dep.OkHttp.okhttp
+    implementation Dep.OkHttp.logging
+    implementation Dep.Retrofit.retrofit
+    implementation Dep.Retrofit.converter
+    implementation Dep.Twitter4j.core
 
     testImplementation Dep.Junit5.api
     testRuntimeOnly Dep.Junit5.engine

@@ -32,12 +32,12 @@ import com.kouta.customtwitter.ui.theme.CustomTwitterTheme
 fun TweetItem(
     modifier: Modifier = Modifier,
     tweetItem: Tweet,
-    onItemClick: (tweetID: Int) -> Unit = {}
+    onItemClick: (tweetID: String) -> Unit = {}
 ) {
     ConstraintLayout(
         modifier = modifier
             .fillMaxWidth()
-            .clickable { onItemClick(tweetItem.tweetID) }
+            .clickable { onItemClick(tweetItem.id.toString()) }
             .padding(vertical = 8.dp)
     ) {
         val (
@@ -60,7 +60,7 @@ fun TweetItem(
                     start.linkTo(parent.start, 8.dp)
                 }
                 .clip(shape = CircleShape),
-            url = tweetItem.userIconUrl
+            url = tweetItem.user.iconUrl
         )
 
         ConstraintLayout(
@@ -82,7 +82,7 @@ fun TweetItem(
                         top.linkTo(parent.top)
                         start.linkTo(parent.start)
                     },
-                text = tweetItem.userName,
+                text = tweetItem.user.name,
                 fontSize = 16.sp,
                 maxLines = 1,
                 color = MaterialTheme.colors.secondary,
@@ -97,7 +97,7 @@ fun TweetItem(
                         end.linkTo(parent.end)
                         width = Dimension.fillToConstraints
                     },
-                text = tweetItem.userID,
+                text = tweetItem.user.userID,
                 fontSize = 14.sp,
                 maxLines = 1,
                 color = MaterialTheme.colors.secondaryVariant,
@@ -140,7 +140,7 @@ fun TweetItem(
                     end.linkTo(parent.end, 8.dp)
                     width = Dimension.fillToConstraints
                 },
-            text = tweetItem.tweet,
+            text = tweetItem.text,
             fontSize = 16.sp,
             color = MaterialTheme.colors.secondary
         )
